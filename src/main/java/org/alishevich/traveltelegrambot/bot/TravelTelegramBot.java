@@ -1,7 +1,9 @@
 package org.alishevich.traveltelegrambot.bot;
 
 import org.alishevich.traveltelegrambot.command.CommandContainer;
+import org.alishevich.traveltelegrambot.service.CityService;
 import org.alishevich.traveltelegrambot.service.SendBotMessageServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -22,8 +24,9 @@ public class TravelTelegramBot extends TelegramLongPollingBot {
 
     private final CommandContainer commandContainer;
 
-    public TravelTelegramBot() {
-        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this));
+    @Autowired
+    public TravelTelegramBot(CityService cityService) {
+        this.commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), cityService);
     }
 
     @Override

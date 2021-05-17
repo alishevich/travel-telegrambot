@@ -12,7 +12,7 @@ public class HelpCommand implements Command{
     public static final String HELP_MESSAGE = String.format("<b>Доступные команды</b>\n\n"
                     + "%s - начать работу со мной\n"
                     + "%s - получить помощь в работе со мной\n"
-                    + "%s - получить информацию о городе\n",
+                    + "%s название города - получить информацию о городе\n",
             START.getCommandName(), HELP.getCommandName(), CITY.getCommandName());
 
     public HelpCommand(SendBotMessageService sendBotMessageService) {
