@@ -1,5 +1,7 @@
 package org.alishevich.traveltelegrambot.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -24,10 +26,12 @@ public class Info extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonBackReference
     private City city;
 
     public Info(Integer id, String cityInfo) {
         super(id);
         this.cityInfo = cityInfo;
     }
+
 }

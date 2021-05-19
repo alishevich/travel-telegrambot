@@ -1,5 +1,6 @@
 package org.alishevich.traveltelegrambot.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class City extends BaseEntity{
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
+    @JsonManagedReference
     private List<Info> infos;
 
     public City(Integer id, String name) {

@@ -7,6 +7,8 @@ import java.util.List;
 public interface CityService {
     City getWithInfoByName(String name);
 
+    City getWithInfos(int id);
+
     City get(int id);
 
     List<City> getAll();
