@@ -42,7 +42,11 @@ public class CityCommand implements Command{
 
     private void sendCityEmptyMessage(String chatId) {
         String cityEmptyMessage = "Передавать команду /city необходимо вместе с названием города.\n"
-                + "Пример ввода: /city Рим";
+                + "Пример ввода: /city Рим\n\n"
+                + "Я подготовил список городов:\n"
+                + cityService.getAll().stream()
+                .map(City::getName)
+                .collect(Collectors.joining("\n"));
         sendBotMessageService.sendMessage(chatId, cityEmptyMessage);
     }
 

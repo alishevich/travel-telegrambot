@@ -3,6 +3,7 @@ package org.alishevich.traveltelegrambot.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.alishevich.traveltelegrambot.entity.City;
 import org.alishevich.traveltelegrambot.service.CityService;
+import org.alishevich.traveltelegrambot.service.CityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +19,7 @@ import static org.alishevich.traveltelegrambot.util.ValidationUtil.assureIdConsi
 import static org.alishevich.traveltelegrambot.util.ValidationUtil.checkNew;
 
 @RestController
-@RequestMapping(CityController.URL)
+@RequestMapping(value = CityController.URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
 public class CityController {
     static final String URL = "/api/cities";
@@ -26,7 +27,7 @@ public class CityController {
     private final CityService service;
 
     @Autowired
-    public CityController(CityService service) {
+    public CityController(CityServiceImpl service) {
         this.service = service;
     }
 
