@@ -1,6 +1,5 @@
 package org.alishevich.traveltelegrambot.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.alishevich.traveltelegrambot.entity.City;
 import org.alishevich.traveltelegrambot.entity.Info;
 import org.alishevich.traveltelegrambot.exception.NotFoundException;
@@ -32,6 +31,7 @@ class CityControllerTest  extends AbstractControllerTest{
     private InfoService infoService;
 
     private static final String URL = CityController.URL + '/';
+    private static final int NOT_FOUND = 20;
 
     @Test
     void get() throws Exception {
@@ -45,16 +45,12 @@ class CityControllerTest  extends AbstractControllerTest{
                 .andExpect(content().json(objectMapper.writeValueAsString(newCity)));
     }
 
-    /*
     @Test
     void getNotFound() throws Exception {
-        int notFoundId = 20;
-        perform(MockMvcRequestBuilders.get(URL + notFoundId))
+        perform(MockMvcRequestBuilders.get(URL + NOT_FOUND))
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
     }
-
-     */
 
     @Test
     void getWithInfos() throws Exception {
@@ -98,17 +94,18 @@ class CityControllerTest  extends AbstractControllerTest{
         assertThrows(NotFoundException.class, () -> service.get(ID));
     }
 
+    @Test
+    void deleteNotFound() throws Exception {
+        perform(MockMvcRequestBuilders.delete(URL + NOT_FOUND))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
     private static City createNewCity() {
         return new City(null, "city1");
     }
 
     private City saveCity() {
         return repository.save(createNewCity());
-    }
-
-    private Info saveInfo(int cityId) {
-        return infoService.create(new Info(null, "info1"), cityId);
-
     }
 
     private City createCityWithInfo() {
