@@ -24,9 +24,7 @@ Clone project:
 git clone https://github.com/alishevich/travel-telegrambot.git
 ```
 Deploy:
-```
-mvn clean package
-```
+
 ```
 $ docker build -t travel .
 ```
